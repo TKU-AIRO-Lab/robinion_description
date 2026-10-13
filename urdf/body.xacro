@@ -28,11 +28,11 @@
       </collision>
 
       <inertial>
-        <origin xyz="-0.007122 0.000256 0.034914" rpy="0.0 0.0 0.0"/>
+        <origin xyz="-0.007122 0.000256 0.040914" rpy="0.0 0.0 0.0"/>
         <mass value="0.960747"/>
         <inertia
-          ixx="0.002662" ixy="0.000002" ixz="0.000113"
-          iyy="0.001197" iyz="0.000003"
+          ixx="0.002662" ixy="-0.000002" ixz="-0.000113"
+          iyy="0.001197" iyz="-0.000003"
           izz="0.002578"/>
       </inertial>
     </link>
@@ -42,8 +42,7 @@
       <child link="upper_body_link"/>
       <origin xyz="0.019 0.0245 0.07675" rpy="0.0 0.0 0.0"/>
       <axis xyz="0 1 0"/>
-      <limit velocity="3.14" effort="10.6" lower="-0.52" upper="${pi*0.5}"/>
-      <dynamics damping="0.1" friction="0.0"/>
+      <xacro:dxl_joint_props joint="torso_pitch_joint" lower="-0.52" upper="${pi*0.5}"/>
     </joint>
 
     <link name="upper_body_link">
@@ -65,8 +64,8 @@
         <origin xyz="-0.029870 -0.024411 0.123492" rpy="0.0 0.0 0.0"/>
         <mass value="1.234139"/>
         <inertia
-          ixx="0.006795" ixy="0.000000" ixz="-0.000098"
-          iyy="0.003101" iyz="-0.000005"
+          ixx="0.006795" ixy="0.000000" ixz="0.000098"
+          iyy="0.003101" iyz="0.000005"
           izz="0.006100"/>
       </inertial>
     </link>

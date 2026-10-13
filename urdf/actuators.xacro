@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="actuators" value="${xacro.load_yaml('$(find robinion_description)/config/actuators.yaml')}"/>
+
+  <!-- Emits <limit> and <dynamics> for a joint from its servo model in config/actuators.yaml. -->
+  <xacro:macro name="dxl_joint_props" params="joint lower upper">
+    <xacro:property name="spec" value="${actuators['joints'][joint]}"/>
+    <xacro:property name="model" value="${actuators['models'][spec['model']]}"/>
+    <xacro:property name="n" value="${spec['count']}"/>
+    <limit velocity="${model['velocity']}" effort="${model['effort'] * n}" lower="${lower}" upper="${upper}"/>
+    <dynamics damping="${round((model['damping'] + model['viscous']) * n, 4)}" friction="${model['friction'] * n}"/>
+  </xacro:macro>
+
+</robot>

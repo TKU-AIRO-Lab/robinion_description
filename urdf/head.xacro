@@ -9,8 +9,7 @@
       <child link="head_yaw_link"/>
       <origin xyz="-0.0125 -0.0245 0.183051" rpy="0.0 0.0 0.0"/>
       <axis xyz="0 0 1"/>
-      <limit velocity="4.82" effort="4.1" lower="${-pi*0.5}" upper="${pi*0.5}"/>
-      <dynamics damping="0.1" friction="0.0"/>
+      <xacro:dxl_joint_props joint="head_yaw_joint" lower="${-pi*0.5}" upper="${pi*0.5}"/>
     </joint>
 
     <link name="head_yaw_link">
@@ -36,8 +35,7 @@
       <child link="head_pitch_link"/>
       <origin xyz="0.000 0.019 0.047" rpy="0.0 0.0 0.0"/>
       <axis xyz="0 -1 0"/>
-      <limit velocity="4.82" effort="4.1" lower="${-pi*0.5}" upper="${pi*0.5}"/>
-      <dynamics damping="0.1" friction="0.0"/>
+      <xacro:dxl_joint_props joint="head_pitch_joint" lower="${-pi*0.5}" upper="${pi*0.5}"/>
     </joint>
 
     <link name="head_pitch_link">
@@ -59,8 +57,8 @@
         <origin xyz="0.000985 -0.018216 0.022305" rpy="0.0 0.0 0.0"/>
         <mass value="0.164500"/>
         <inertia
-          ixx="0.000115" ixy="0.000000" ixz="0.000005"
-          iyy="0.000092" iyz="0.000001"
+          ixx="0.000115" ixy="0.000000" ixz="-0.000005"
+          iyy="0.000092" iyz="-0.000001"
           izz="0.000047"/>
       </inertial>
     </link>

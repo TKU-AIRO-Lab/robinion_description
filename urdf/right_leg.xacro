@@ -9,8 +9,7 @@
       <child link="right_hip_yaw_link"/>
       <origin xyz="0.0 -0.055 0.0" rpy="0.0 0.0 0.0"/>
       <axis xyz="0 0 1"/>
-      <limit velocity="4.82" effort="4.1" lower="${-pi*0.5}" upper="${pi*0.5}"/>
-      <dynamics damping="0.1" friction="0.0"/>
+      <xacro:dxl_joint_props joint="right_hip_yaw_joint" lower="${-pi*0.5}" upper="${pi*0.5}"/>
     </joint>
 
     <link name="right_hip_yaw_link">
@@ -43,8 +42,7 @@
       <child link="right_hip_roll_pitch_link"/>
       <origin xyz="0.047875 0.0 -0.05" rpy="0.0 0.0 0.0"/>
       <axis xyz="1 0 0"/>
-      <limit velocity="4.08" effort="9.9" lower="${-pi*0.5}" upper="${pi*0.5}"/>
-      <dynamics damping="0.1" friction="0.0"/>
+      <xacro:dxl_joint_props joint="right_hip_roll_joint" lower="${-pi*0.5}" upper="${pi*0.5}"/>
     </joint>
 
     <link name="right_hip_roll_pitch_link">
@@ -77,8 +75,7 @@
       <child link="right_front_thigh_pitch_link"/>
       <origin xyz="-0.0245 0.0245 0.0" rpy="0.0 0.0 0.0"/>
       <axis xyz="0 1 0"/>
-      <limit velocity="4.08" effort="19.8" lower="${-pi*0.5}" upper="${pi*0.5}"/>
-      <dynamics damping="0.1" friction="0.0"/>
+      <xacro:dxl_joint_props joint="right_front_thigh_pitch_joint" lower="${-pi*0.5}" upper="${pi*0.5}"/>
     </joint>
 
     <link name="right_front_thigh_pitch_link">
@@ -97,11 +94,11 @@
       </collision>
 
       <inertial>
-        <origin xyz="0.011621 -0.024250 -0.106919" rpy="0.00 0.00 0.00"/>
+        <origin xyz="0.011621 -0.024250 -0.106954" rpy="0.00 0.00 0.00"/>
         <mass value="0.078"/>
-        <inertia 
-          ixx="0.000255" ixy="0.000003" ixz="0.000004" 
-          iyy="0.000220" iyz="0.000000" 
+        <inertia
+          ixx="0.000255" ixy="0.000000" ixz="0.000004"
+          iyy="0.000220" iyz="0.000000"
           izz="0.000043"/>
       </inertial>
     </link>
@@ -132,11 +129,11 @@
 
       <inertial>
         <origin xyz="-0.010643 -0.024500 -0.094743" rpy="0.00 0.00 0.00"/>
-        <mass value="0.06"/>
-        <inertia 
-          ixx="0.000255" ixy="0.000000" ixz="0.000004" 
-          iyy="0.000220" iyz="0.000000" 
-          izz="0.000043"/>
+        <mass value="0.0667"/>
+        <inertia
+          ixx="0.000235" ixy="0.000000" ixz="0.000001"
+          iyy="0.000202" iyz="0.000000"
+          izz="0.000039"/>
       </inertial>
     </link>
 
@@ -145,8 +142,7 @@
       <child link="right_knee_pitch_link"/>
       <origin xyz="0.0 0.0 -0.2" rpy="0.0 0.0 0.0"/>
       <axis xyz="0 1 0"/>
-      <limit velocity="4.08" effort="19.8" lower="${-pi*0.5}" upper="${pi*0.5}"/>
-      <dynamics damping="0.1" friction="0.0"/>
+      <xacro:dxl_joint_props joint="right_knee_pitch_joint" lower="${-pi*0.5}" upper="${pi*0.5}"/>
     </joint>
 
     <link name="right_knee_pitch_link">
@@ -165,12 +161,12 @@
       </collision>
 
       <inertial>
-        <origin xyz="-0.005325 -0.024024 -0.017387" rpy="0.00 0.00 0.00"/>
+        <origin xyz="-0.005329 -0.024028 -0.017389" rpy="0.00 0.00 0.00"/>
         <mass value="0.34"/>
-        <inertia 
-          ixx="0.000242" ixy="0.000000" ixz="0.000000" 
-          iyy="0.000210" iyz="0.000000" 
-          izz="0.000190"/>
+        <inertia
+          ixx="0.000200" ixy="-0.000001" ixz="-0.000008"
+          iyy="0.000231" iyz="-0.000001"
+          izz="0.000179"/>
       </inertial>
     </link>
     
@@ -179,8 +175,7 @@
       <child link="right_front_shin_pitch_link"/>
       <origin xyz="0.0 0.0 -0.04775" rpy="0.0 0.0 0.0"/>
       <axis xyz="0 1 0"/>
-      <limit velocity="4.08" effort="9.9" lower="${-pi*0.5}" upper="${pi*0.5}"/>
-      <dynamics damping="0.1" friction="0.0"/>
+      <xacro:dxl_joint_props joint="right_front_shin_pitch_joint" lower="${-pi*0.5}" upper="${pi*0.5}"/>
     </joint>
 
     <link name="right_front_shin_pitch_link">
@@ -199,11 +194,11 @@
       </collision>
 
       <inertial>
-        <origin xyz="0.012786 -0.024250 -0.104736" rpy="0.00 0.00 0.00"/>
+        <origin xyz="0.012775 -0.024250 -0.104814" rpy="0.00 0.00 0.00"/>
         <mass value="0.079"/>
-        <inertia 
-          ixx="0.000259" ixy="0.000000" ixz="0.000000" 
-          iyy="0.000223" iyz="0.000000" 
+        <inertia
+          ixx="0.000260" ixy="0.000000" ixz="-0.000010"
+          iyy="0.000224" iyz="0.000000"
           izz="0.000043"/>
       </inertial>
     </link>
@@ -234,11 +229,11 @@
 
       <inertial>
         <origin xyz="-0.010643 -0.024500 -0.105257" rpy="0.00 0.00 0.00"/>
-        <mass value="0.06"/>
-        <inertia 
-          ixx="0.000255" ixy="0.000000" ixz="0.000004" 
-          iyy="0.000220" iyz="0.000000" 
-          izz="0.000043"/>
+        <mass value="0.0667"/>
+        <inertia
+          ixx="0.000235" ixy="0.000000" ixz="-0.000001"
+          iyy="0.000202" iyz="0.000000"
+          izz="0.000039"/>
       </inertial>
     </link>
 
@@ -247,8 +242,7 @@
       <child link="right_ankle_roll_pitch_link"/>
       <origin xyz="0.0 0.0 -0.2" rpy="0.0 0.0 0.0"/>
       <axis xyz="0 1 0"/>
-      <limit velocity="4.08" effort="9.9" lower="${-pi*0.5}" upper="${pi*0.5}"/>
-      <dynamics damping="0.1" friction="0.0"/>
+      <xacro:dxl_joint_props joint="right_ankle_pitch_joint" lower="${-pi*0.5}" upper="${pi*0.5}"/>
     </joint>
 
     <link name="right_ankle_roll_pitch_link">
@@ -267,11 +261,11 @@
       </collision>
 
       <inertial>
-        <origin xyz="-0.044839 -0.000311 0.015111" rpy="0.0 0.0 0.0"/>
+        <origin xyz="-0.020341 -0.024809 0.015114" rpy="0.0 0.0 0.0"/>
         <mass value="0.467377"/>
-        <inertia 
-          ixx="0.000198" ixy="0.000003" ixz="0.000001" 
-          iyy="0.000406" iyz="0.000000" 
+        <inertia
+          ixx="0.000198" ixy="-0.000003" ixz="-0.000001"
+          iyy="0.000406" iyz="0.000000"
           izz="0.000326"/>
       </inertial>
     </link>
@@ -281,8 +275,7 @@
       <child link="right_foot_roll_link"/>
       <origin xyz="0.0245 -0.02425 0.0" rpy="0.0 0.0 0.0"/>
       <axis xyz="1 0 0"/>
-      <limit velocity="4.08" effort="9.9" lower="${-pi*0.5}" upper="${pi*0.5}"/>
-      <dynamics damping="0.1" friction="0.0"/>
+      <xacro:dxl_joint_props joint="right_ankle_roll_joint" lower="${-pi*0.5}" upper="${pi*0.5}"/>
     </joint>
 
     <link name="right_foot_roll_link">
@@ -303,10 +296,10 @@
       <inertial>
         <origin xyz="-0.024014 -0.000000 -0.048357" rpy="0.0 0.0 0.0"/>
         <mass value="0.229"/>
-        <inertia 
-          ixx="0.000557" ixy="0.000003" ixz="0.000001" 
-          iyy="0.000081" iyz="0.000000" 
-          izz="-0.000023"/>
+        <inertia
+          ixx="0.000081" ixy="0.000000" ixz="0.000022"
+          iyy="0.000555" iyz="0.000000"
+          izz="0.000577"/>
       </inertial>
     </link>
 

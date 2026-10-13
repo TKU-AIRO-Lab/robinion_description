@@ -2,6 +2,8 @@
 
 <robot name="robinion" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+  <xacro:include filename="$(find robinion_description)/urdf/actuators.xacro"/>
+
   <xacro:include filename="$(find robinion_description)/urdf/body.xacro"/>
   <xacro:include filename="$(find robinion_description)/urdf/head.xacro"/>
 

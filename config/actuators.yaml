@@ -1,0 +1,63 @@
+# DYNAMIXEL actuator parameters (single source of truth, read by urdf/actuators.xacro).
+#
+# effort / velocity : ROBOTIS e-Manual, at 14.8 V (4S Li-Po nominal). velocity = no-load speed.
+#                     Rated input range is 10.0-14.8 V; a fully charged 4S pack (16.8 V) is above it.
+# damping  [Nm*s/rad] : back-EMF damping, linearized torque-speed curve = stall torque / no-load speed.
+# viscous  [Nm*s/rad] : gearbox viscous friction (BAM m1 friction_viscous). Added to damping in the URDF.
+# friction [Nm]       : Coulomb friction (BAM m1 friction_base). URDF <dynamics friction>.
+# armature [kg*m^2]   : reflected rotor inertia = rotor inertia * gear_ratio^2. URDF has no field for
+#                       this; set it in the actuator cfg (Isaac Lab) or <joint armature> (MuJoCo).
+#
+# armature / friction / viscous are PRIORS transferred from BAM (github.com/Rhoban/bam @ e9a619d)
+# identifications of MX-series servos, see bam_prior below. Replace with your own BAM results.
+models:
+  XH540-W270: {effort: 11.7, velocity: 4.817, gear_ratio: 272.5, damping: 2.429, viscous: 0.035, friction: 0.10, armature: 0.038}
+  XM540-W270: {effort: 12.9, velocity: 3.875, gear_ratio: 272.5, damping: 3.329, viscous: 0.035, friction: 0.10, armature: 0.038}
+  XM430-W350: {effort: 4.8,  velocity: 5.969, gear_ratio: 353.5, damping: 0.804, viscous: 0.012, friction: 0.09, armature: 0.038}
+
+# Initial guesses / bounds for running BAM identification on the X-series servos (output-shaft units).
+#   reference     : BAM-identified MX servo whose rotor is assumed equivalent
+#                   (MX-106 225:1 -> 540 series, MX-64 200:1 -> XM430).
+#   rotor_inertia : BAM m6 armature / MX gear_ratio^2 [kg*m^2]
+#   armature      : rotor_inertia * X gear_ratio^2; range spans BAM models m1..m6
+#   kt [Nm/A]     : bounds = stall torque / stall current .. V / no-load speed (14.8 V); init = mean
+#   R  [Ohm]      : init = V / stall current (14.8 V)
+# Caveat: XM540 uses a different motor than XH540 (and than MX-106); its armature is the least certain.
+bam_prior:
+  XH540-W270: {reference: mx106, rotor_inertia: 5.14e-7, armature: {init: 0.038, min: 0.036, max: 0.039},
+               kt: {init: 2.53, min: 1.98, max: 3.07}, R: {init: 2.51, min: 1.5, max: 4.0}}
+  XM540-W270: {reference: mx106, rotor_inertia: 5.14e-7, armature: {init: 0.038, min: 0.036, max: 0.039},
+               kt: {init: 3.08, min: 2.35, max: 3.82}, R: {init: 2.69, min: 1.5, max: 4.0}}
+  XM430-W350: {reference: mx64,  rotor_inertia: 3.07e-7, armature: {init: 0.038, min: 0.034, max: 0.038},
+               kt: {init: 2.13, min: 1.78, max: 2.48}, R: {init: 5.48, min: 3.0, max: 8.0}}
+
+# count: number of servos driving the joint in parallel (effort, damping, friction, armature scale by count).
+joints:
+  torso_pitch_joint:              {model: XM540-W270, count: 1}
+  head_yaw_joint:                 {model: XM430-W350, count: 1}
+  head_pitch_joint:               {model: XM430-W350, count: 1}
+
+  left_shoulder_pitch_joint:      {model: XM540-W270, count: 1}
+  left_shoulder_roll_joint:       {model: XM540-W270, count: 1}
+  left_elbow_yaw_joint:           {model: XM430-W350, count: 1}
+  left_elbow_pitch_joint:         {model: XM540-W270, count: 1}
+  right_shoulder_pitch_joint:     {model: XM540-W270, count: 1}
+  right_shoulder_roll_joint:      {model: XM540-W270, count: 1}
+  right_elbow_yaw_joint:          {model: XM430-W350, count: 1}
+  right_elbow_pitch_joint:        {model: XM540-W270, count: 1}
+
+  left_hip_yaw_joint:             {model: XM540-W270, count: 1}
+  left_hip_roll_joint:            {model: XH540-W270, count: 1}
+  left_front_thigh_pitch_joint:   {model: XH540-W270, count: 2}
+  left_knee_pitch_joint:          {model: XH540-W270, count: 2}
+  left_front_shin_pitch_joint:    {model: XH540-W270, count: 1}
+  left_ankle_pitch_joint:         {model: XH540-W270, count: 1}
+  left_ankle_roll_joint:          {model: XH540-W270, count: 1}
+  right_hip_yaw_joint:            {model: XM540-W270, count: 1}
+  right_hip_roll_joint:           {model: XH540-W270, count: 1}
+  right_front_thigh_pitch_joint:  {model: XH540-W270, count: 2}
+  right_knee_pitch_joint:         {model: XH540-W270, count: 2}
+  right_front_shin_pitch_joint:   {model: XH540-W270, count: 1}
+  right_ankle_pitch_joint:        {model: XH540-W270, count: 1}
+  right_ankle_roll_joint:         {model: XH540-W270, count: 1}
+  # back_thigh / back_shin joints are parallel-link bars; left unmapped until the closed chain is modeled.
